@@ -88,10 +88,10 @@ Archive:  getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 ± |master ✗| →
 ```
 
-### running `run_analysis.R``
+### running `run_analysis.R`
 
 The script loads data from the `UCI HAR Dataset's` `test/` and `train/` sub-directories.
-It expects to find the following data files inside `UCI HAR Dataset` (<dataset> is one of `test` or `train`, depending on the respective dataset directories):
+It expects to find the following data files inside `UCI HAR Dataset` (`<dataset>` is one of `test` or `train`, depending on the respective dataset directories):
 
 * `features.txt`: list of the variable names in the accelerometer data set (used to label columns in the resulting file)
 * `activity_labels.txt`: labels(factors) for the activity information
