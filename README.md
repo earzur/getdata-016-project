@@ -99,20 +99,13 @@ It expects to find the following data files inside `UCI HAR Dataset` (`<dataset>
 * `<dataset>/y_<dataset>.txt`: activity information
 * `<dataset>/subject_<dataset>.txt`: test subject information
 
-Once the data has been loaded, the scripts aggregates the 2 datasets, picking only data for the following measures:
-
-1. `tBodyAcc-mean()-X`
-1. `tBodyAcc-mean()-Y`
-1. `tBodyAcc-mean()-Z`
-1. `tBodyAcc-std()-X`
-1. `tBodyAcc-std()-Y`
-1. `tBodyAcc-std()-Z`
+Once the data has been loaded, the scripts aggregates the 2 datasets, picking only relevant data for the measures whose names contain 'mean()' and 'std()'.
 
 It then replaces activity numbers in column 2 to factors as described in `activity_labels.txt`.
 
-And finally computes mean values by (`subject`,`activity`) groups for each of the accelerometer data column.
+And finally computes mean values by (`subject`,`activity`) groups for each of the data column.
 
-The result is then saved into `output.txt` in the current working directory, using `write.table` function.
+The result is then saved into `output.txt` in the current working directory, using the `write.table` function.
 
 #### sample script output
 
@@ -128,11 +121,6 @@ Reading activity data from UCI HAR Dataset/train/y_train.txt
 Reading subject data from UCI HAR Dataset/train/subject_train.txt
 Writing results to output.txt
 
-|ruby-1.9.3-p547| moody2-2 in ~/dev/perso/getdata-016
-± |master ✗| → more output.txt
-"subject" "activity" "mean(tBodyAcc.mean...X)" "mean(tBodyAcc.mean...Y)" "mean(tBodyAcc.mean...Z)" "mean(tBodyAcc.std...X)" "mean(tBodyAcc.std...Y)" "mean(tBodyAcc.std...Z)"
-1 "LAYING" 0.22159824394 -0.0405139534294 -0.11320355358 -0.9280564692 -0.83682740562 -0.826061401628
-1 "SITTING" 0.261237565425532 -0.00130828765170213 -0.104544182255319 -0.977229008297872 -0.922618641914894 -0.93958629106383
 
 ```
 
