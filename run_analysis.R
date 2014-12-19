@@ -32,17 +32,26 @@ prepare_data_set <- function(x,y,s) {
 
 load_data <- function(dataset) {
   # data
-  x <- read.table(file.path(data_path,dataset,sub('xxxx',dataset,'X_xxxx.txt')),col.names = features[,2])
+  px <- file.path(data_path,dataset,sub('xxxx',dataset,'X_xxxx.txt')) 
+  message(paste("Reading accelerometer data from",px))
+  x <- read.table(px,col.names = features[,2])
   # activity
-  y <- read.table(file.path(data_path,dataset,sub('xxxx',dataset,'y_xxxx.txt')))
+  py <- file.path(data_path,dataset,sub('xxxx',dataset,'y_xxxx.txt'))
+  message(paste("Reading activity data from",py))
+  y <- read.table(py)
   # subject 
-  s <- read.table(file.path(data_path,dataset,sub('xxxx',dataset,'subject_xxxx.txt')))
+  ps <- file.path(data_path,dataset,sub('xxxx',dataset,'subject_xxxx.txt'))
+  message(paste("Reading subject data from",ps))
+  s <- read.table(ps)
   
   prepare_data_set(x,y,s)
 }
 
 load_and_prepare <- function() {
+  # load an merge the 2 datasets
   d <- rbind(load_data('test'),load_data('train'))
+  
+  # group by subject and activity then compute mean values for each group
   d %>% 
     group_by(subject,activity) %>%
     summarize(mean(tBodyAcc.mean...X),
@@ -54,5 +63,5 @@ load_and_prepare <- function() {
 }
 
 result <- load_and_prepare()
-
+message("Writing results to output.txt")
 write.table(result,file='output.txt',row.names=FALSE)
