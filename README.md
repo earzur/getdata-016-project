@@ -86,7 +86,6 @@ Archive:  getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
 |ruby-1.9.3-p547| moody2-2 in ~/dev/perso/getdata-016
 ± |master ✗| →
-````
 ```
 
 ### running `run_analysis.R``
