@@ -26,9 +26,9 @@ Checking connectivity... done.
 
 ```#!shell
 |ruby-1.9.3-p547| moody2-2 in ~/dev/perso
-○ → cd testing/
+○ → cd getdata-016/
 
-|ruby-1.9.3-p547| moody2-2 in ~/dev/perso/testing
+|ruby-1.9.3-p547| moody2-2 in ~/dev/perso/getdata-016
 ± |master ✓| →
 ````
 
@@ -37,18 +37,18 @@ Checking connectivity... done.
 download and extract the dataset provided for the course project
 
 ```#!shell
-|ruby-1.9.3-p547| moody2-2 in ~/dev/perso/testing
+|ruby-1.9.3-p547| moody2-2 in ~/dev/perso/getdata-016
 ± |master ✓| → curl -O https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100 59.6M  100 59.6M    0     0  1994k      0  0:00:30  0:00:30 --:--:-- 2123k
 
-|ruby-1.9.3-p547| moody2-2 in ~/dev/perso/testing
+|ruby-1.9.3-p547| moody2-2 in ~/dev/perso/getdata-016
 ± |master ✗| → ls
 README.md                                        run_analysis.R
 getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
-|ruby-1.9.3-p547| moody2-2 in ~/dev/perso/testing
+|ruby-1.9.3-p547| moody2-2 in ~/dev/perso/getdata-016
 ± |master ✗| → unzip getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 Archive:  getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
   inflating: UCI HAR Dataset/activity_labels.txt
@@ -84,7 +84,7 @@ Archive:  getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
   inflating: UCI HAR Dataset/train/X_train.txt
   inflating: UCI HAR Dataset/train/y_train.txt
 
-|ruby-1.9.3-p547| moody2-2 in ~/dev/perso/testing
+|ruby-1.9.3-p547| moody2-2 in ~/dev/perso/getdata-016
 ± |master ✗| →
 ````
 ```
@@ -92,7 +92,7 @@ Archive:  getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 ### running `run_analysis.R``
 
 The script loads data from the `UCI HAR Dataset's` `test/` and `train/` sub-directories.
-It expects to find the following data files inside each those directories (<dataset> is one of `test` or `train`, depending on the respective directories:
+It expects to find the following data files inside `UCI HAR Dataset` (<dataset> is one of `test` or `train`, depending on the respective dataset directories):
 
 * `features.txt`: list of the variable names in the accelerometer data set (used to label columns in the resulting file)
 * `activity_labels.txt`: labels(factors) for the activity information
@@ -114,6 +114,28 @@ It then replaces activity numbers in column 2 to factors as described in `activi
 And finally computes mean values by (`subject`,`activity`) groups for each of the accelerometer data column.
 
 The result is then saved into `output.txt` in the current working directory, using `write.table` function.
+
+#### sample script output
+
+```
+|ruby-1.9.3-p547| moody2-2 in ~/dev/perso/getdata-016
+± |master ✗| → Rscript run_analysis.R
+
+Reading accelerometer data from UCI HAR Dataset/test/X_test.txt
+Reading activity data from UCI HAR Dataset/test/y_test.txt
+Reading subject data from UCI HAR Dataset/test/subject_test.txt
+Reading accelerometer data from UCI HAR Dataset/train/X_train.txt
+Reading activity data from UCI HAR Dataset/train/y_train.txt
+Reading subject data from UCI HAR Dataset/train/subject_train.txt
+Writing results to output.txt
+
+|ruby-1.9.3-p547| moody2-2 in ~/dev/perso/getdata-016
+± |master ✗| → more output.txt
+"subject" "activity" "mean(tBodyAcc.mean...X)" "mean(tBodyAcc.mean...Y)" "mean(tBodyAcc.mean...Z)" "mean(tBodyAcc.std...X)" "mean(tBodyAcc.std...Y)" "mean(tBodyAcc.std...Z)"
+1 "LAYING" 0.22159824394 -0.0405139534294 -0.11320355358 -0.9280564692 -0.83682740562 -0.826061401628
+1 "SITTING" 0.261237565425532 -0.00130828765170213 -0.104544182255319 -0.977229008297872 -0.922618641914894 -0.93958629106383
+
+```
 
 ### Note about changing default data location 
 
